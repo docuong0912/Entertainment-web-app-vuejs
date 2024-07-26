@@ -1,39 +1,29 @@
 /* color palette from <https://github.com/vuejs/theme> */
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@100..900&display=swap');
 :root {
-  --vt-c-white: #ffffff;
-  --vt-c-white-soft: #f8f8f8;
-  --vt-c-white-mute: #f2f2f2;
-
-  --vt-c-black: #181818;
-  --vt-c-black-soft: #222222;
-  --vt-c-black-mute: #282828;
-
-  --vt-c-indigo: #2c3e50;
-
-  --vt-c-divider-light-1: rgba(60, 60, 60, 0.29);
-  --vt-c-divider-light-2: rgba(60, 60, 60, 0.12);
-  --vt-c-divider-dark-1: rgba(84, 84, 84, 0.65);
-  --vt-c-divider-dark-2: rgba(84, 84, 84, 0.48);
-
-  --vt-c-text-light-1: var(--vt-c-indigo);
-  --vt-c-text-light-2: rgba(60, 60, 60, 0.66);
-  --vt-c-text-dark-1: var(--vt-c-white);
-  --vt-c-text-dark-2: rgba(235, 235, 235, 0.64);
+  --pure-white: #ffffff;
+  --grayish-blue: #5a698f;
+  --dark-blue: #10141e;
+  --semi-dark-blue: #161d2f;
+  --red-custom: #fc4747;
 }
 
 /* semantic color variables for this project */
 :root {
-  --color-background: var(--vt-c-white);
-  --color-background-soft: var(--vt-c-white-soft);
-  --color-background-mute: var(--vt-c-white-mute);
+  --color-icon-active: var(--pure-white);
+  --color-logo: var(--red-custom);
+  --color-background: var(--dark-blue);
 
-  --color-border: var(--vt-c-divider-light-2);
-  --color-border-hover: var(--vt-c-divider-light-1);
+  --color-text: var(--pure-white);
+  --color-text-secondary: var(--grayish-blue);
 
-  --color-heading: var(--vt-c-text-light-1);
+  --color-menu-background: var(--semi-dark-blue);
   --color-text: var(--vt-c-text-light-1);
 
-  --section-gap: 160px;
+  --text-xs: 18px;
+  --text-s: 24px;
+  --text-m: 24px;
+  --text-l: 32px;
 }
 
 @media (prefers-color-scheme: dark) {
@@ -56,6 +46,7 @@
   box-sizing: border-box;
   margin: 0;
   font-weight: normal;
+  font-family: 'Outfit', sans-serif;
 }
 
 body {
@@ -66,19 +57,7 @@ body {
     color 0.5s,
     background-color 0.5s;
   line-height: 1.6;
-  font-family:
-    Inter,
-    -apple-system,
-    BlinkMacSystemFont,
-    'Segoe UI',
-    Roboto,
-    Oxygen,
-    Ubuntu,
-    Cantarell,
-    'Fira Sans',
-    'Droid Sans',
-    'Helvetica Neue',
-    sans-serif;
+  font-family: 'Outfit', sans-serif;
   font-size: 15px;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
