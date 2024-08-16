@@ -10,6 +10,8 @@ declare module 'vue' {
     AButton: typeof import('ant-design-vue/es')['Button']
     AMenu: typeof import('ant-design-vue/es')['Menu']
     HelloWorld: typeof import('./src/components/HelloWorld.vue')['default']
+    IconApp: typeof import('./src/components/icons/IconApp.vue')['default']
+    IconAppLogo: typeof import('./src/components/icons/IconAppLogo.vue')['default']
     IconBookmarkEmpty: typeof import('./src/components/icons/IconBookmarkEmpty.vue')['default']
     IconBookmarkFull: typeof import('./src/components/icons/IconBookmarkFull.vue')['default']
     IconCategoryMovie: typeof import('./src/components/icons/IconCategoryMovie.vue')['default']

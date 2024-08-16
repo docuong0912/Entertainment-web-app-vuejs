@@ -1,0 +1,15 @@
+.ant-menu {
+  height: 960px;
+}
+.ant-menu-item-disabled {
+  padding: 32px 25px !important;
+}
+header .ant-menu-inline-collapsed {
+  width: 96px;
+}
+header {
+  top: 32px;
+  left: 32px;
+  position: absolute;
+  height: 960px;
+}

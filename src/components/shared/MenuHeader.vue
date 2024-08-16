@@ -10,50 +10,67 @@
       mode="inline"
       theme="dark"
       :inline-collapsed="state.collapsed"
-      :items="items"
-    ></a-menu>
+      class="rounded-3xl"
+    >
+      <IconAppLogo class="m-8" />
+      <div class="relative top-16">
+        <a-menu-item key="1">
+          <template #icon>
+            <IconNavHome />
+          </template>
+          <span>Trang chủ</span>
+        </a-menu-item>
+        <a-menu-item key="2">
+          <template #icon>
+            <IconNavMovies />
+          </template>
+          <span>Phim</span>
+        </a-menu-item>
+        <a-menu-item key="3">
+          <template #icon>
+            <IconNavTVSeries />
+          </template>
+          <span>Chương trình TV</span>
+        </a-menu-item>
+        <a-menu-item key="4">
+          <template #icon>
+            <IconNavBookmark />
+          </template>
+          <span>Đánh dấu</span>
+        </a-menu-item>
+        <a-menu-item key="4">
+          <template #icon>
+            <IconNavBookmark />
+          </template>
+          <span>Đánh dấu</span>
+        </a-menu-item>
+      </div>
+    </a-menu>
+    <a-avatar
+      :class="state.collapsed ? 'left-8 absolute bottom-1' : 'left-20 absolute bottom-1'"
+      :src="userStore.thumbnail || 'Oval.png'"
+      alt="thumbnail"
+      :size="state.collapsed ? 32 : 64"
+    />
   </div>
 </template>
 <script lang="ts" setup>
-import { reactive, watch, h } from 'vue'
+import { reactive } from 'vue'
 import { RouterLink, RouterView } from 'vue-router'
 import IconNavHome from '../icons/IconNavHome.vue'
 import IconNavMovies from '../icons/IconNavMovies.vue'
 import IconNavTVSeries from '../icons/IconNavTVSeries.vue'
 import IconNavBookmark from '../icons/IconNavBookmark.vue'
+import IconAppLogo from '../icons/IconAppLogo.vue'
+import './menu-header.css'
+import { useUserStore } from '@/stores/user'
+const userStore = useUserStore()
 const state = reactive({
   collapsed: false,
   selectedKeys: ['1'],
   openKeys: ['sub1'],
   preOpenKeys: ['sub1']
 })
-const items = reactive([
-  {
-    key: '1',
-    icon: () => h(IconNavHome),
-    label: 'Home',
-    title: 'Home'
-  },
-  {
-    key: '2',
-    icon: () => h(IconNavMovies),
-    label: 'Movies',
-    title: 'Movies'
-  },
-  {
-    key: '3',
-    icon: () => h(IconNavTVSeries),
-    label: 'TV Series',
-    title: 'TV Series'
-  },
-  {
-    key: '4',
-    icon: () => h(IconNavBookmark),
-    label: 'Bookmarks',
-    title: 'Bookmarks'
-  }
-])
-
 const toggleCollapsed = () => {
   state.collapsed = !state.collapsed
   state.openKeys = state.collapsed ? [] : state.preOpenKeys
