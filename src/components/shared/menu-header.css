@@ -10,6 +10,11 @@ header .ant-menu-inline-collapsed {
 header {
   top: 32px;
   left: 32px;
-  position: absolute;
   height: 960px;
+}
+.ant-menu-title-content {
+  margin-left: 20px !important;
+}
+.ant-menu-item {
+  padding-left: 30px !important;
 }

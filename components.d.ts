@@ -9,6 +9,8 @@ declare module 'vue' {
   export interface GlobalComponents {
     AButton: typeof import('ant-design-vue/es')['Button']
     AMenu: typeof import('ant-design-vue/es')['Menu']
+    AppMovie: typeof import('./src/components/AppMovie.vue')['default']
+    AppSearch: typeof import('./src/components/AppSearch.vue')['default']
     HelloWorld: typeof import('./src/components/HelloWorld.vue')['default']
     IconApp: typeof import('./src/components/icons/IconApp.vue')['default']
     IconAppLogo: typeof import('./src/components/icons/IconAppLogo.vue')['default']
@@ -27,6 +29,7 @@ declare module 'vue' {
     IconSearch: typeof import('./src/components/icons/IconSearch.vue')['default']
     IconSupport: typeof import('./src/components/icons/IconSupport.vue')['default']
     IconTooling: typeof import('./src/components/icons/IconTooling.vue')['default']
+    MainLayout: typeof import('./src/components/MainLayout.vue')['default']
     MenuHeader: typeof import('./src/components/shared/MenuHeader.vue')['default']
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']

@@ -1,5 +1,4 @@
 /* eslint-disable no-unused-labels */
-import { ref, computed } from 'vue'
 import { defineStore } from 'pinia'
 interface UserInfo {
   name: string
