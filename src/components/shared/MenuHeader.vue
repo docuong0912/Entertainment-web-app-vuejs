@@ -14,31 +14,25 @@
     >
       <IconAppLogo class="m-8" />
       <div class="relative top-16">
-        <a-menu-item key="1">
+        <a-menu-item key="1" @click="navigateTo('/')">
           <template #icon>
             <IconNavHome />
           </template>
           <span>Trang chủ</span>
         </a-menu-item>
-        <a-menu-item key="2">
+        <a-menu-item key="2" @click="navigateTo('/movies')">
           <template #icon>
             <IconNavMovies />
           </template>
           <span>Phim</span>
         </a-menu-item>
-        <a-menu-item key="3">
+        <a-menu-item key="3" @click="navigateTo('/TV-series')">
           <template #icon>
             <IconNavTVSeries />
           </template>
           <span>Chương trình TV</span>
         </a-menu-item>
-        <a-menu-item key="4">
-          <template #icon>
-            <IconNavBookmark />
-          </template>
-          <span>Đánh dấu</span>
-        </a-menu-item>
-        <a-menu-item key="4">
+        <a-menu-item key="4" @click="navigateTo('/bookmarked')">
           <template #icon>
             <IconNavBookmark />
           </template>
@@ -64,6 +58,7 @@ import IconNavBookmark from '../icons/IconNavBookmark.vue'
 import IconAppLogo from '../icons/IconAppLogo.vue'
 import './menu-header.css'
 import { useUserStore } from '@/stores/user'
+import router from '@/router'
 const userStore = useUserStore()
 const state = reactive({
   collapsed: false,
@@ -74,5 +69,8 @@ const state = reactive({
 const toggleCollapsed = () => {
   state.collapsed = !state.collapsed
   state.openKeys = state.collapsed ? [] : state.preOpenKeys
+}
+const navigateTo = (nav: string) => {
+  router.push(nav)
 }
 </script>

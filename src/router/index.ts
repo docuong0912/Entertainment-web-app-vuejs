@@ -13,12 +13,37 @@ const router = createRouter({
       }
     },
     {
-      path: '/about',
-      name: 'about',
+      path: '/movies',
+      name: 'movies',
       // route level code-splitting
       // this generates a separate chunk (About.[hash].js) for this route
       // which is lazy-loaded when the route is visited.
-      component: () => import('../views/AboutView.vue')
+      components: {
+        default: () => import('../views/MoviesView.vue'),
+        SearchBar: () => import('@/components/AppSearch.vue')
+      }
+    },
+    {
+      path: '/TV-series',
+      name: 'TVSeries',
+      // route level code-splitting
+      // this generates a separate chunk (About.[hash].js) for this route
+      // which is lazy-loaded when the route is visited.
+      components: {
+        default: () => import('../views/TVView.vue'),
+        SearchBar: () => import('@/components/AppSearch.vue')
+      }
+    },
+    {
+      path: '/bookmarked',
+      name: 'bookmarked',
+      // route level code-splitting
+      // this generates a separate chunk (About.[hash].js) for this route
+      // which is lazy-loaded when the route is visited.
+      components: {
+        default: () => import('../views/BookmarkView.vue'),
+        SearchBar: () => import('@/components/AppSearch.vue')
+      }
     }
   ]
 })
