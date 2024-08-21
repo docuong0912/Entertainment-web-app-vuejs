@@ -42,7 +42,7 @@
     </a-menu>
     <a-avatar
       :class="state.collapsed ? 'left-8 absolute bottom-1' : 'left-20 absolute bottom-1'"
-      :src="userStore.thumbnail || 'Oval.png'"
+      :src="'Oval.png'"
       alt="thumbnail"
       :size="state.collapsed ? 32 : 64"
     />
@@ -50,16 +50,16 @@
 </template>
 <script lang="ts" setup>
 import { reactive } from 'vue'
-import { RouterLink, RouterView } from 'vue-router'
+import { RouterLink, RouterView, useRouter } from 'vue-router'
 import IconNavHome from '../icons/IconNavHome.vue'
 import IconNavMovies from '../icons/IconNavMovies.vue'
 import IconNavTVSeries from '../icons/IconNavTVSeries.vue'
 import IconNavBookmark from '../icons/IconNavBookmark.vue'
 import IconAppLogo from '../icons/IconAppLogo.vue'
 import './menu-header.css'
-import { useUserStore } from '@/stores/user'
-import router from '@/router'
-const userStore = useUserStore()
+// import { useUserStore } from '@/stores/user'
+// const userStore = useUserStore()
+const router = useRouter()
 const state = reactive({
   collapsed: false,
   selectedKeys: ['1'],

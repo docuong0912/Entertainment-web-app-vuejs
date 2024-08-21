@@ -1,24 +1,46 @@
+import FakeAPI from '@/services/fake-api.service'
 import { defineStore } from 'pinia'
 export interface Movie {
   title: string
-  thumbnail: string
-  year: string
+  thumbnail: Thumbnail
+  year: number
   category: string
   rating: string
   isTrending: boolean
 }
+interface Thumbnail {
+  regular: ThumbnailSize
+  trending?: ThumbnailSize
+}
+interface ThumbnailSize {
+  small: string
+  medium?: string
+  large: string
+}
 
 export const useMovieStore = defineStore('movie', {
   state: () => ({
-    movies: [
-      {
-        title: '112',
-        thumbnail: 'https://i.ibb.co/w6hWG5W/large.jpg',
-        year: '2013',
-        category: 'TV Series',
-        rating: 'PG',
-        isTrending: false
+    movies: [] as Movie[]
+  }),
+  actions: {
+    async fetchData() {
+      try {
+        const res = await FakeAPI.getData()
+        if (res.ok) {
+          const movie = await res.json()
+          this.setMovie(movie)
+        }
+      } catch (error) {
+        console.error(error)
       }
-    ] as Movie[]
-  })
+    },
+    setMovie(data: Movie[]) {
+      this.movies = data
+    }
+  },
+  getters: {
+    getTrendingMovies(): Movie[] {
+      return this.movies.filter((m) => m.isTrending)
+    }
+  }
 })

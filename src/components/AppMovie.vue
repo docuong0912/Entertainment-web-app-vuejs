@@ -1,11 +1,17 @@
 <template>
   <div class="relative">
-    <a-image :preview="false" :width="470" :height="230" :src="movie?.thumbnail" />
+    <a-image
+      :preview="false"
+      alt="moive thumbnail"
+      :src="
+        movie?.isTrending ? movie?.thumbnail?.trending?.large : movie?.thumbnail?.regular?.large
+      "
+    />
     <div class="absolute left-6 bottom-6">
-      <p class="text-white text-xl">
+      <p class="text-white text-sm">
         {{ movie?.year }} . {{ movie?.category }} . {{ movie?.rating }}
       </p>
-      <b class="text-white text-4xl">{{ movie?.title }}</b>
+      <b class="text-white text-md">{{ movie?.title }}</b>
     </div>
   </div>
 </template>
