@@ -1,55 +1,14 @@
 <template>
-  <div>
-    <a-button type="primary" style="margin-bottom: 16px" @click="toggleCollapsed">
-      <MenuUnfoldOutlined v-if="state.collapsed" />
-      <MenuFoldOutlined v-else />
-    </a-button>
-    <a-menu
-      v-model:openKeys="state.openKeys"
-      v-model:selectedKeys="state.selectedKeys"
-      mode="inline"
-      theme="dark"
-      :inline-collapsed="state.collapsed"
-      class="rounded-3xl"
-    >
-      <IconAppLogo class="m-8" />
-      <div class="relative top-16">
-        <a-menu-item key="1" @click="navigateTo('/')">
-          <template #icon>
-            <IconNavHome />
-          </template>
-          <span>Trang chủ</span>
-        </a-menu-item>
-        <a-menu-item key="2" @click="navigateTo('/movies')">
-          <template #icon>
-            <IconNavMovies />
-          </template>
-          <span>Phim</span>
-        </a-menu-item>
-        <a-menu-item key="3" @click="navigateTo('/TV-series')">
-          <template #icon>
-            <IconNavTVSeries />
-          </template>
-          <span>Chương trình TV</span>
-        </a-menu-item>
-        <a-menu-item key="4" @click="navigateTo('/bookmarked')">
-          <template #icon>
-            <IconNavBookmark />
-          </template>
-          <span>Đánh dấu</span>
-        </a-menu-item>
-      </div>
-    </a-menu>
-    <a-avatar
-      :class="state.collapsed ? 'left-8 absolute bottom-1' : 'left-20 absolute bottom-1'"
-      :src="'Oval.png'"
-      alt="thumbnail"
-      :size="state.collapsed ? 32 : 64"
-    />
-  </div>
+  <a-menu
+    @click="(item: any) => navigateTo(item.key)"
+    mode="horizontal"
+    theme="dark"
+    class="rounded-3xl"
+    :items="items"
+  />
 </template>
-<script lang="ts" setup>
-import { reactive } from 'vue'
+<script lang="ts">
+import { h } from 'vue'
 import { RouterLink, RouterView, useRouter } from 'vue-router'
 import IconNavHome from '../icons/IconNavHome.vue'
 import IconNavMovies from '../icons/IconNavMovies.vue'
@@ -57,20 +16,67 @@ import IconNavTVSeries from '../icons/IconNavTVSeries.vue'
 import IconNavBookmark from '../icons/IconNavBookmark.vue'
 import IconAppLogo from '../icons/IconAppLogo.vue'
 import './menu-header.css'
+import type { ItemType } from 'ant-design-vue'
 // import { useUserStore } from '@/stores/user'
 // const userStore = useUserStore()
-const router = useRouter()
-const state = reactive({
-  collapsed: false,
-  selectedKeys: ['1'],
-  openKeys: ['sub1'],
-  preOpenKeys: ['sub1']
-})
-const toggleCollapsed = () => {
-  state.collapsed = !state.collapsed
-  state.openKeys = state.collapsed ? [] : state.preOpenKeys
-}
-const navigateTo = (nav: string) => {
-  router.push(nav)
+export default {
+  data() {
+    const router = useRouter()
+    const activeKey: string = 'home'
+    const items = [
+      {
+        key: 'home',
+        icon: () => h(IconNavHome),
+        label: '',
+        title: 'Trang chủ',
+        class: 'active-nav'
+      },
+      {
+        key: 'movies',
+        icon: () => h(IconNavMovies),
+        label: '',
+        title: 'Phim',
+        class: ''
+      },
+      {
+        key: 'tv-series',
+        icon: () => h(IconNavTVSeries),
+        label: '',
+        title: 'Chương trình TV',
+        class: ''
+      },
+      {
+        key: 'bookmarked',
+        icon: () => h(IconNavBookmark),
+        label: '',
+        title: 'Đánh dấu',
+        class: ''
+      }
+    ]
+    return { items, router, activeKey }
+  },
+  watch: {
+    activeKey(val: string) {
+      const newItems = this.items.map((item) => {
+        // If this item is the one we want to activate, update its class
+        if (item?.key === val) {
+          return { ...item, class: 'active-nav' }
+        }
+        // Otherwise, reset its class
+        return { ...item, class: '' }
+      })
+
+      // Update items to trigger reactivity
+      this.items = [...newItems]
+    }
+  },
+  computed: {},
+  methods: {
+    navigateTo(key: string) {
+      this.activeKey = key
+      if (key === 'home') this.router?.push('/')
+      else this.router?.push(key)
+    }
+  }
 }
 </script>

@@ -3,20 +3,19 @@ import { RouterLink, RouterView } from 'vue-router'
 </script>
 
 <template>
-  <header class="pb-4">
-    <menu-header />
-    <!-- <div class="wrapper">
-      <HelloWorld msg="You did it!" />
-      <nav>
-        <RouterLink to="/">Home</RouterLink>
-        <RouterLink to="/about">About</RouterLink>
-      </nav>
-    </div> -->
-  </header>
-  <main class="ml-5">
-    <RouterView name="SearchBar"></RouterView>
-    <RouterView />
-  </main>
+  <a-layout class="bg-transparent">
+    <header>
+      <a-row class="flex flex-row justify-around items-center">
+        <IconAppLogo />
+        <menu-header />
+        <a-avatar :src="'Oval.png'" alt="thumbnail" size="32" />
+      </a-row>
+    </header>
+    <main class="w-screen">
+      <RouterView name="SearchBar"></RouterView>
+      <RouterView />
+    </main>
+  </a-layout>
 </template>
 
 <style scoped>

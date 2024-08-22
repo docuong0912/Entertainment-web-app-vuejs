@@ -1,6 +1,6 @@
 import FakeAPI from '@/services/fake-api.service'
 import { defineStore } from 'pinia'
-export interface Movie {
+interface Movie {
   title: string
   thumbnail: Thumbnail
   year: number
@@ -39,8 +39,11 @@ export const useMovieStore = defineStore('movie', {
     }
   },
   getters: {
-    getTrendingMovies(): Movie[] {
-      return this.movies.filter((m) => m.isTrending)
+    getTrendingMovies(state): Movie[] {
+      return state.movies.filter((m) => m.isTrending)
+    },
+    getAllMovieNotTrending(state): Movie[] {
+      return state.movies.filter((m) => !m.isTrending)
     }
   }
 })
