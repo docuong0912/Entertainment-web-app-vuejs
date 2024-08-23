@@ -11,6 +11,7 @@ declare module 'vue' {
     AMenu: typeof import('ant-design-vue/es')['Menu']
     AppMovie: typeof import('./src/components/AppMovie.vue')['default']
     AppSearch: typeof import('./src/components/AppSearch.vue')['default']
+    AppSearchResult: typeof import('./src/components/shared/AppSearchResult.vue')['default']
     HelloWorld: typeof import('./src/components/HelloWorld.vue')['default']
     IconApp: typeof import('./src/components/icons/IconApp.vue')['default']
     IconAppLogo: typeof import('./src/components/icons/IconAppLogo.vue')['default']

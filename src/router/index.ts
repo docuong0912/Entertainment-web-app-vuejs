@@ -9,28 +9,31 @@ const router = createRouter({
       name: 'home',
       components: {
         default: HomeView,
-        SearchBar: () => import('@/components/AppSearch.vue')
-      }
+        SearchBar: () => import('@/components/AppSearch.vue'),
+        SearchResult: () => import('@/components/shared/AppSearchResult.vue')
+      },
+      props: true
     },
     {
       path: '/movies',
-      name: 'movies',
+      name: 'movie',
       // route level code-splitting
       // this generates a separate chunk (About.[hash].js) for this route
       // which is lazy-loaded when the route is visited.
       components: {
-        default: () => import('../views/MoviesView.vue'),
-        SearchBar: () => import('@/components/AppSearch.vue')
+        default: () => import('../views/HomeView.vue'),
+        SearchBar: () => import('@/components/AppSearch.vue'),
+        SearchResult: () => import('@/components/shared/AppSearchResult.vue')
       }
     },
     {
-      path: '/TV-series',
-      name: 'TVSeries',
+      path: '/tvseries',
+      name: 'tvseries',
       // route level code-splitting
       // this generates a separate chunk (About.[hash].js) for this route
       // which is lazy-loaded when the route is visited.
       components: {
-        default: () => import('../views/TVView.vue'),
+        default: () => import('../views/HomeView.vue'),
         SearchBar: () => import('@/components/AppSearch.vue')
       }
     },

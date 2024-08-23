@@ -13,6 +13,7 @@ import { RouterLink, RouterView } from 'vue-router'
     </header>
     <main class="w-screen">
       <RouterView name="SearchBar"></RouterView>
+      <RouterView name="SearchResult" />
       <RouterView />
     </main>
   </a-layout>

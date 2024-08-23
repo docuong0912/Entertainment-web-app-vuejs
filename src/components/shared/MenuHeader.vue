@@ -29,17 +29,17 @@ export default {
         icon: () => h(IconNavHome),
         label: '',
         title: 'Trang chủ',
-        class: 'active-nav'
+        class: this.$route.name === 'home' && 'active-nav'
       },
       {
         key: 'movies',
         icon: () => h(IconNavMovies),
         label: '',
         title: 'Phim',
-        class: ''
+        class: this.$route.name === 'movie' && 'active-nav'
       },
       {
-        key: 'tv-series',
+        key: 'tvseries',
         icon: () => h(IconNavTVSeries),
         label: '',
         title: 'Chương trình TV',
@@ -56,10 +56,10 @@ export default {
     return { items, router, activeKey }
   },
   watch: {
-    activeKey(val: string) {
+    $route(val) {
       const newItems = this.items.map((item) => {
         // If this item is the one we want to activate, update its class
-        if (item?.key === val) {
+        if (item?.key === val.name) {
           return { ...item, class: 'active-nav' }
         }
         // Otherwise, reset its class

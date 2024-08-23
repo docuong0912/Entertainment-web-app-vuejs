@@ -1,6 +1,6 @@
 import FakeAPI from '@/services/fake-api.service'
 import { defineStore } from 'pinia'
-interface Movie {
+export interface Movie {
   title: string
   thumbnail: Thumbnail
   year: number
@@ -20,7 +20,8 @@ interface ThumbnailSize {
 
 export const useMovieStore = defineStore('movie', {
   state: () => ({
-    movies: [] as Movie[]
+    movies: [] as Movie[],
+    keySearch: '' as string
   }),
   actions: {
     async fetchData() {
@@ -44,6 +45,20 @@ export const useMovieStore = defineStore('movie', {
     },
     getAllMovieNotTrending(state): Movie[] {
       return state.movies.filter((m) => !m.isTrending)
+    },
+    getMovies(state) {
+      return (onSearch = false, category: string = '', isTrending: boolean = false) => {
+        const filteredMovie = state.movies.filter(
+          (m) =>
+            m.title.trim().toLowerCase().includes(state.keySearch.toString().toLowerCase()) &&
+            m.category.replace(/\s/g, '').toLowerCase().includes(category.toLowerCase())
+        )
+        if (!onSearch) {
+          return filteredMovie.filter((m) => m.isTrending === isTrending)
+        }
+        console.log(filteredMovie)
+        return filteredMovie
+      }
     }
   }
 })
