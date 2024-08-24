@@ -23,23 +23,40 @@
       </p>
       <b class="text-white text-md">{{ movie?.title }}</b>
     </div>
+    <div
+      :class="[
+        'absolute rounded-full bg-[--grayish-blue] w-8 h-8 flex justify-center items-center opacity-80',
+        !movie.isTrending ? ' top-2 right-3 ' : 'top-2 right-14'
+      ]"
+    >
+      <IconBookmarkEmpty @click="setBookmarkMovie" v-if="!bookmarked?.includes(movie.title)" />
+      <IconBookmarkFull @click="setBookmarkMovie" v-if="bookmarked?.includes(movie.title)" />
+    </div>
   </div>
 </template>
 <script lang="ts">
 import { getIcon } from '@/constants/icons.constant'
+import IconBookmarkEmpty from './icons/IconBookmarkEmpty.vue'
+import IconBookmarkFull from './icons/IconBookmarkFull.vue'
 
 export default {
-  props: ['movie', 'onSearching'],
+  props: ['movie', 'onSearching', 'setBookmark', 'bookmarked'],
   data() {
     return {
       displayInSmallSize: !this.movie.isTrending || this.onSearching
+    }
+  },
+  methods: {
+    setBookmarkMovie() {
+      this.$emit('setBookmark', this.movie)
     }
   },
   computed: {
     icon() {
       return getIcon(this.movie.category.replace(/\s/g, '').toUpperCase())
     }
-  }
+  },
+  watch: {}
 }
 </script>
 <style scoped>

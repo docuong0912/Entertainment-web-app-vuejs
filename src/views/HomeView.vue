@@ -1,7 +1,7 @@
 <script lang="ts">
 import AppMovie from '@/components/AppMovie.vue'
 import FakeAPI from '@/services/fake-api.service'
-import { useMovieStore } from '@/stores/movie'
+import { useMovieStore, type Movie } from '@/stores/movie'
 import { mapActions, mapState } from 'pinia'
 import { useRoute } from 'vue-router'
 
@@ -11,14 +11,23 @@ export default {
     const router = useRoute()
     return {
       routerName: router.name === 'home' ? '' : router.name,
-      movies: movieStore
+      movies: movieStore,
+      bookmarked: JSON.parse((localStorage.getItem('bookmarked') as string) || '[]')
     }
   },
   created() {
     this.fetchData()
   },
   methods: {
-    ...mapActions(useMovieStore, ['setMovie', 'fetchData'])
+    ...mapActions(useMovieStore, ['fetchData']),
+    bookmarkMovie(movie: Movie) {
+      if (this.bookmarked.includes(movie.title)) {
+        this.bookmarked = this.bookmarked.filter((b: string) => b !== movie.title)
+      } else {
+        this.bookmarked.push(movie.title)
+      }
+      localStorage.setItem('bookmarked', JSON.stringify(this.bookmarked))
+    }
   },
   computed: {
     // Map the state to computed properties
@@ -54,7 +63,7 @@ export default {
           :key="movie.title"
           class="movie-container odd:!m-0"
         >
-          <AppMovie :movie="movie" />
+          <AppMovie :movie="movie" @setBookmark="bookmarkMovie" :bookmarked="bookmarked" />
         </div>
       </div>
     </div>

@@ -1,10 +1,16 @@
 <template>
   <div :class="movies.keySearch === '' && 'hidden'">
     <p class="text-xl text-white ml-4">
-      Tìm thấy {{ movies.getMovies(true).length }} kết quả cho '{{ movies.keySearch }}'
+      Tìm thấy {{ movies.getMovies(true, $route.name as string).length }} kết quả cho '{{
+        movies.keySearch
+      }}'
     </p>
     <div class="flex w-screen flex-row flex-wrap justify-start *:ml-2">
-      <div v-for="movie in movies.getMovies(true)" :key="movie.title" class="movie-container">
+      <div
+        v-for="movie in movies.getMovies(true, $route.name as string)"
+        :key="movie.title"
+        class="movie-container"
+      >
         <AppMovie :movie="movie" :onSearching="true" />
       </div>
     </div>
@@ -23,7 +29,7 @@ export default {
     }
   },
   methods: {
-    ...mapActions(useMovieStore, ['setMovie', 'fetchData'])
+    ...mapActions(useMovieStore, ['fetchData'])
   },
   computed: {
     // Map the state to computed properties

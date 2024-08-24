@@ -29,34 +29,40 @@ export const useMovieStore = defineStore('movie', {
         const res = await FakeAPI.getData()
         if (res.ok) {
           const movie = await res.json()
-          this.setMovie(movie)
+          this.movies = movie
         }
       } catch (error) {
         console.error(error)
       }
-    },
-    setMovie(data: Movie[]) {
-      this.movies = data
     }
   },
   getters: {
-    getTrendingMovies(state): Movie[] {
-      return state.movies.filter((m) => m.isTrending)
-    },
-    getAllMovieNotTrending(state): Movie[] {
-      return state.movies.filter((m) => !m.isTrending)
+    getBookmarkedMovie(state) {
+      return (category: string) => {
+        if (localStorage.bookmarked) {
+          const bookmarked = JSON.parse(localStorage.getItem('bookmarked') as string)
+          return state.movies.filter(
+            (m) =>
+              m.category.replace(/\s/g, '').toLowerCase() === category.toLowerCase() &&
+              bookmarked.includes(m.title)
+          )
+        } else return []
+      }
     },
     getMovies(state) {
       return (onSearch = false, category: string = '', isTrending: boolean = false) => {
-        const filteredMovie = state.movies.filter(
-          (m) =>
-            m.title.trim().toLowerCase().includes(state.keySearch.toString().toLowerCase()) &&
-            m.category.replace(/\s/g, '').toLowerCase().includes(category.toLowerCase())
+        let filteredMovie = state.movies.filter((m) =>
+          m.title.trim().toLowerCase().includes(state.keySearch.toString().toLowerCase())
         )
+        if (category !== 'home' && category !== '') {
+          filteredMovie = filteredMovie.filter((m) =>
+            m.category.replace(/\s/g, '').toLowerCase().includes(category.toLowerCase())
+          )
+        }
         if (!onSearch) {
           return filteredMovie.filter((m) => m.isTrending === isTrending)
         }
-        console.log(filteredMovie)
+
         return filteredMovie
       }
     }

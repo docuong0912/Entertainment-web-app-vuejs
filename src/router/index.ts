@@ -34,7 +34,8 @@ const router = createRouter({
       // which is lazy-loaded when the route is visited.
       components: {
         default: () => import('../views/HomeView.vue'),
-        SearchBar: () => import('@/components/AppSearch.vue')
+        SearchBar: () => import('@/components/AppSearch.vue'),
+        SearchResult: () => import('@/components/shared/AppSearchResult.vue')
       }
     },
     {
@@ -45,7 +46,8 @@ const router = createRouter({
       // which is lazy-loaded when the route is visited.
       components: {
         default: () => import('../views/BookmarkView.vue'),
-        SearchBar: () => import('@/components/AppSearch.vue')
+        SearchBar: () => import('@/components/AppSearch.vue'),
+        SearchResult: () => import('@/components/shared/AppSearchResult.vue')
       }
     }
   ]
