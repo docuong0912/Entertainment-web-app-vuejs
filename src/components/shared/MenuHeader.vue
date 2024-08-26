@@ -1,7 +1,7 @@
 <template>
   <a-menu
     @click="(item: any) => navigateTo(item.key)"
-    mode="horizontal"
+    :mode="menuDisplay"
     theme="dark"
     class="rounded-3xl"
     :items="items"
@@ -17,12 +17,14 @@ import IconNavBookmark from '../icons/IconNavBookmark.vue'
 import IconAppLogo from '../icons/IconAppLogo.vue'
 import './menu-header.css'
 import type { ItemType } from 'ant-design-vue'
+import useDevice, { DeviceSize } from '@/constants/media.constant'
 // import { useUserStore } from '@/stores/user'
 // const userStore = useUserStore()
 export default {
   data() {
     const router = useRouter()
     const activeKey: string = 'home'
+    const media = useDevice()
     const items = [
       {
         key: 'home',
@@ -53,7 +55,7 @@ export default {
         class: ''
       }
     ]
-    return { items, router, activeKey }
+    return { items, router, activeKey, media }
   },
   watch: {
     $route(val) {
@@ -70,7 +72,11 @@ export default {
       this.items = [...newItems]
     }
   },
-  computed: {},
+  computed: {
+    menuDisplay() {
+      return this.media.size >= DeviceSize.lg ? 'inline' : 'horizontal'
+    }
+  },
   methods: {
     navigateTo(key: string) {
       this.activeKey = key

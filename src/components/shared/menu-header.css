@@ -22,3 +22,6 @@ header .ant-row:first-child {
 .active-nav svg path {
   fill: white;
 }
+.ant-menu {
+  background: transparent;
+}
