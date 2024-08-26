@@ -32,7 +32,7 @@ export default {
         class: this.$route.name === 'home' && 'active-nav'
       },
       {
-        key: 'movies',
+        key: 'movie',
         icon: () => h(IconNavMovies),
         label: '',
         title: 'Phim',
