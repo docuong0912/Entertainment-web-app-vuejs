@@ -27,4 +27,4 @@ coverage
 *.sln
 *.sw?
 *.tsbuildinfo
-env.d.ts
+.vercel
