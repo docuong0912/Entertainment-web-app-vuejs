@@ -1,17 +1,18 @@
 <template>
-  <div class="p-4">
-    <p class="text-xl text-white uppercase">{{ VNCategoryName }}</p>
+  <div :class="[movies.keySearch !== '' && 'hidden', 'p-4']">
+    <p class="text-xl text-white uppercase lg:text-3xl">{{ VNCategoryName }}</p>
     <div class="flex w-screen flex-row flex-wrap justify-start *:ml-3 lg:!w-full">
       <div
-        v-for="movie in movies.getMovies(false, $route.name as string)"
+        v-for="movie in movies.getMovies(true, $route.name as string)"
         :key="movie.title"
-        class="odd:!m-0"
+        class="odd:!m-0 lg:w-72 lg:odd:!ml-2"
       >
         <AppMovie
           :movie="movie"
           :bookmarked="bookmarked"
           @setBookmark="bookmarkMovie"
           :displayLarge="displayLarge"
+          :onSearching="true"
         />
       </div>
     </div>

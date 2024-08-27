@@ -5,7 +5,7 @@ import { RouterLink, RouterView } from 'vue-router'
 <template>
   <a-layout class="bg-transparent">
     <a-row>
-      <a-col :xs="24" :lg="2" class="lg:p-5">
+      <a-col :xs="24" :lg="2" class="lg:p-5 lg:h-screen">
         <header class="w-full lg:p-5 lg:bg-[--color-menu-background] lg:!h-full lg:w-24">
           <a-row class="flex flex-row justify-around lg:justify-center items-center">
             <a-col :lg="24" class="lg:*:m-auto">
@@ -21,8 +21,8 @@ import { RouterLink, RouterView } from 'vue-router'
         </header>
       </a-col>
       <a-col :xs="24" :lg="22">
-        <main class="w-screen lg:w-full">
-          <RouterView class="lg:mt-4" name="SearchBar"></RouterView>
+        <main class="w-screen lg:w-full lg:m-3">
+          <RouterView class="lg:mt-4 lg:mb-5" name="SearchBar"></RouterView>
           <RouterView name="SearchResult" />
           <RouterView />
         </main>

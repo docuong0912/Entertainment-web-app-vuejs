@@ -49,11 +49,11 @@ export default {
 <template>
   <div :class="movies.keySearch !== '' && 'hidden'">
     <div>
-      <p class="text-xl text-white ml-4">Trending</p>
+      <p class="text-xl text-white ml-4 lg:text-3xl">Trending</p>
       <div
         :class="[
-          'ml-3 overflow-x-auto w-full whitespace-nowrap *:inline-block',
-          displayLarge && 'lg:*:ml-3 lg:first:!m-0'
+          !displayLarge && 'ml-3 overflow-x-auto w-full whitespace-nowrap *:inline-block',
+          displayLarge && 'lg:*:ml-3 lg:first:!m-0 lg:w-full lg:!max-w-screen *:inline-block'
         ]"
       >
         <div
@@ -61,12 +61,18 @@ export default {
           :key="movie.title"
           class="w-60 h-36 movie-trending"
         >
-          <AppMovie :movie="movie" :displayLarge="displayLarge" />
+          <AppMovie
+            :movie="movie"
+            :displayLarge="displayLarge"
+            @setBookmark="bookmarkMovie"
+            :bookmarked="bookmarked"
+            :onHomePage="true"
+          />
         </div>
       </div>
     </div>
     <div class="p-4">
-      <p class="text-xl text-white">Dành cho bạn</p>
+      <p class="text-xl text-white lg:text-3xl">Dành cho bạn</p>
       <div class="flex w-screen flex-row flex-wrap justify-start *:ml-3 lg:w-full">
         <div
           v-for="movie in movies.getMovies(false, routerName as string)"

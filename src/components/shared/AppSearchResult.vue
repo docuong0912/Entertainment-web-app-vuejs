@@ -5,13 +5,19 @@
         movies.keySearch
       }}'
     </p>
-    <div class="flex w-screen flex-row flex-wrap justify-start *:ml-2">
+    <div class="flex w-screen flex-row flex-wrap justify-start *:ml-3 lg:!w-full">
       <div
         v-for="movie in movies.getMovies(true, $route.name as string)"
         :key="movie.title"
-        class="movie-container"
+        class="odd:!m-0 lg:w-72 lg:odd:!ml-2"
       >
-        <AppMovie :movie="movie" :onSearching="true" />
+        <AppMovie
+          :movie="movie"
+          :onSearching="true"
+          :bookmarked="bookmarked"
+          @setBookmark="bookmarkMovie"
+          :displayLarge="displayLarge"
+        />
       </div>
     </div>
   </div>
@@ -19,21 +25,35 @@
 
 <script lang="ts">
 import AppMovie from '@/components/AppMovie.vue'
-import { useMovieStore } from '@/stores/movie'
+import useDevice, { DeviceSize } from '@/constants/media.constant'
+import { useMovieStore, type Movie } from '@/stores/movie'
 import { mapActions, mapState } from 'pinia'
 export default {
   data() {
     const movieStore = useMovieStore()
     return {
-      movies: movieStore
+      movies: movieStore,
+      bookmarked: JSON.parse((localStorage.getItem('bookmarked') as string) || '[]'),
+      device: useDevice()
     }
   },
   methods: {
-    ...mapActions(useMovieStore, ['fetchData'])
+    ...mapActions(useMovieStore, ['fetchData']),
+    bookmarkMovie(movie: Movie) {
+      if (this.bookmarked.includes(movie.title)) {
+        this.bookmarked = this.bookmarked.filter((b: string) => b !== movie.title)
+      } else {
+        this.bookmarked.push(movie.title)
+      }
+      localStorage.setItem('bookmarked', JSON.stringify(this.bookmarked))
+    }
   },
   computed: {
     // Map the state to computed properties
-    ...mapState(useMovieStore, ['getMovies', 'keySearch'])
+    ...mapState(useMovieStore, ['getMovies', 'keySearch']),
+    displayLarge() {
+      return this.device.size >= DeviceSize.lg
+    }
   }
 }
 </script>

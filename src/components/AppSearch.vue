@@ -20,7 +20,7 @@ export default {
 <template>
   <a-input
     v-model:value="keySearch"
-    class="bg-transparent border-none"
+    class="bg-transparent border-none lg:text-lg"
     placeholder="Nhập tên phim..."
     size="default"
   >
