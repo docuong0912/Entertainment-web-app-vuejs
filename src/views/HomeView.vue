@@ -48,12 +48,12 @@ export default {
 
 <template>
   <div :class="movies.keySearch !== '' && 'hidden'">
-    <div>
+    <div class="lg:!w-full lg:!max-w-screen !overflow-hidden">
       <p class="text-xl text-white ml-4 lg:text-3xl">Trending</p>
       <div
         :class="[
           !displayLarge && 'ml-3 overflow-x-auto w-full whitespace-nowrap *:inline-block',
-          displayLarge && 'lg:*:ml-3 lg:first:!m-0 lg:w-full lg:!max-w-screen *:inline-block'
+          displayLarge && 'lg:*:ml-3 lg:first:!m-0 !flex'
         ]"
       >
         <div
@@ -77,7 +77,7 @@ export default {
         <div
           v-for="movie in movies.getMovies(false, routerName as string)"
           :key="movie.title"
-          class="movie-container odd:m-0 lg:!ml-3"
+          class="movie-container odd:m-0 lg:!ml-3 lg:!mt-4"
         >
           <AppMovie
             :movie="movie"

@@ -11,11 +11,11 @@ import { RouterLink, RouterView } from 'vue-router'
             <a-col :lg="24" class="lg:*:m-auto">
               <IconAppLogo />
             </a-col>
-            <a-col :lg="24" class="lg:mt-10 ml-4">
+            <a-col :lg="24" class="lg:mt-10 lg:ml-6">
               <menu-header />
             </a-col>
             <a-col :lg="24">
-              <a-avatar :src="'Oval.png'" alt="thumbnail" size="32" class="lg:mt-64 lg:ml-2" />
+              <a-avatar :src="'Oval.png'" alt="thumbnail" size="32" class="lg:mt-96 lg:ml-3" />
             </a-col>
           </a-row>
         </header>

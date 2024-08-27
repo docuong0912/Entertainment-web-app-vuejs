@@ -3,7 +3,7 @@
     <div
       :class="[
         'relative mt-3 after:content-[\'\'] after:w-full after:h-full after:absolute after:top-0 after:left-0 after:bg-black after:opacity-40 after:hidden after:lg:group-hover:block',
-        !onHomePage && 'after:h-[calc(75%+15px)]'
+        !onHomePage && 'after:!h-[calc(75%+3px)]'
       ]"
     >
       <div
